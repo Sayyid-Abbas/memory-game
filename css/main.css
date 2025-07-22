@@ -219,6 +219,15 @@ body > .loader {
 .game-container .cards .card i {
   color: rgb(232, 42, 42);
 }
+@media (max-width: 567px) {
+  .game-container .cards .card {
+    width: 50px;
+    height: 100px;
+  }
+  .game-container .cards .card .face {
+    font-size: 18px;
+  }
+}
 /* End Game */
 @keyframes spin {
   0% {
