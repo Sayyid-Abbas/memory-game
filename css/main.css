@@ -1,0 +1,125 @@
+/* Start Global Rules */
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 20px;
+}
+/* End Global Rules */
+/* Start Welcoming */
+.welcome {
+  max-width: 100%;
+  width: 800px;
+  margin: 100px auto 0px;
+  background-color: #EEE;
+  padding: 20px;
+  border-radius: 10px;
+}
+.welcome .title {
+  text-align: center;
+  background-color: rgb(18, 207, 232);
+  width: fit-content;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin: 0px auto 30px;
+  font-size: 25px;
+  color: white;
+  text-transform: uppercase;
+}
+.welcome .desc {
+  background-color: #11a9b7;
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+  line-height: 2;
+  color: rgb(233, 233, 233);
+  border-radius: 10px;
+}
+.welcome .sample {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 30px;
+  position: relative;
+}
+.welcome .sample .sign {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition-duration: 0.3s;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0px;
+  color: green;
+  border-radius: 10px;
+}
+.welcome .sample .card {
+  height: 100%;
+  width: 100px;
+  border-radius: 10px;
+  font-size: 50px;
+  background-color: #ffff;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  cursor: pointer;
+}
+.welcome .sample .card .inner-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffff;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  position: absolute;
+  backface-visibility: hidden;
+}
+.welcome .sample .card .front {
+  background-color: #333;
+}
+.welcome .sample .card .back {
+  transform: rotateY(180deg);
+}
+.welcome .sample .card i {
+  color: rgb(232, 42, 42);
+}
+.welcome .start {
+  background-color: #11a9b7;
+  border-radius: 10px;
+  padding: 10px 50px;
+  width: fit-content;
+  margin: 30px auto;
+  font-size: 25px;
+  color: white;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+.welcome .start:hover {
+  background-color: #0094a1;
+}
+@media (max-width: 767px) {
+  .welcome .title {
+    font-size: 20px;
+  }
+  .welcome .desc {
+    font-size: 16px;
+  }
+  .welcome .start {
+    font-size: 15px;
+  }
+  .welcome .start:hover {
+    background-color: #11a9b7;
+  }
+}
+/* End Welcoming */
