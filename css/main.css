@@ -145,7 +145,7 @@ body > .loader {
 .game-container {
   user-select: none;
   max-width: 100%;
-  width: 800px;
+  width: 1000px;
   margin: 100px auto 0px;
   background-color: #EEE;
   padding: 20px;
@@ -190,7 +190,7 @@ body > .loader {
 .game-container .cards .card {
   height: 200px;
   flex-grow: 1;
-  width: calc((100% / 6 ) - 5px);
+  width: calc((100% / 8 ) - 5px);
   border-radius: 10px;
   font-size: 50px;
   background-color: #ffff;
@@ -222,6 +222,7 @@ body > .loader {
 @media (max-width: 567px) {
   .game-container .cards .card {
     height: 100px;
+    width: calc((100% / 6) - 5px);
   }
   .game-container .cards .card .face {
     font-size: 18px;
