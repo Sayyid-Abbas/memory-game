@@ -190,7 +190,7 @@ body > .loader {
 .game-container .cards .card {
   height: 200px;
   flex-grow: 1;
-  width: 100px;
+  width: calc((100% / 6 ) - 10px);
   border-radius: 10px;
   font-size: 50px;
   background-color: #ffff;
@@ -221,7 +221,6 @@ body > .loader {
 }
 @media (max-width: 567px) {
   .game-container .cards .card {
-    width: 50px;
     height: 100px;
   }
   .game-container .cards .card .face {
