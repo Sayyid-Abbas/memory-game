@@ -12,6 +12,7 @@ body {
 /* End Global Rules */
 /* Start Welcoming */
 .welcome {
+  user-select: none;
   max-width: 100%;
   width: 800px;
   margin: 100px auto 0px;
