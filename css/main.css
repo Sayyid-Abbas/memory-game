@@ -9,6 +9,22 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   padding: 20px;
 }
+body > .loader {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: #11c8d8 transparent #11a9b7 #11a9b7;
+  border-width: 4px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-name: spin;
+  animation-iteration-count: infinite;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+}
 /* End Global Rules */
 /* Start Welcoming */
 .welcome {
@@ -125,3 +141,90 @@ body {
   }
 }
 /* End Welcoming */
+/* Start Game */
+.game-container {
+  user-select: none;
+  max-width: 100%;
+  width: 800px;
+  margin: 100px auto 0px;
+  background-color: #EEE;
+  padding: 20px;
+  border-radius: 10px;  
+}
+.game-container .header {
+  background-color: #11a9b7;
+  padding: 20px;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.game-container .header .title {
+  font-size: 30px;
+  border-radius: 30px;
+  border: 1px solid white;
+  padding: 10px 20px; 
+  background-color: #11c8d8;
+}
+.game-container .header .time-left,
+.game-container .header .score {
+  border-radius: 10px;
+  background-color: #11c8d8;
+  border: 1px solid white;
+  padding: 5px 10px;
+  font-size: 18px;
+}
+.game-container .header .score span {
+  color: #00ff15;
+}
+.game-container .header .time-left span {
+  color: rgb(255, 208, 0);
+}
+.game-container .cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.game-container .cards .card {
+  height: 200px;
+  flex-grow: 1;
+  width: 100px;
+  border-radius: 10px;
+  font-size: 50px;
+  background-color: #ffff;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  cursor: pointer;
+}
+.game-container .cards .card .face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffff;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  position: absolute;
+  backface-visibility: hidden;
+}
+.game-container .cards .card .front {
+  background-color: #333 !important;
+}
+.game-container .cards .card .back {
+  transform: rotateY(180deg);
+}
+.game-container .cards .card i {
+  color: rgb(232, 42, 42);
+}
+/* End Game */
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
