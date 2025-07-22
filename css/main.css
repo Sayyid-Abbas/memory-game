@@ -185,12 +185,12 @@ body > .loader {
 .game-container .cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 5px;
 }
 .game-container .cards .card {
   height: 200px;
   flex-grow: 1;
-  width: calc((100% / 6 ) - 10px);
+  width: calc((100% / 6 ) - 5px);
   border-radius: 10px;
   font-size: 50px;
   background-color: #ffff;
