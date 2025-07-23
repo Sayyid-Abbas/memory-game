@@ -259,6 +259,94 @@ body > .loader {
   }
 }
 /* End Game */
+/* Start You Won  */
+.game-container .you-won {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #EEE;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.game-container .you-won .you-won-sign {
+  font-size: 30px;
+  background-color: #00be4f;
+  color: white;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid green;
+}
+.game-container .you-won .next {
+  background-color: #0ec0d0;
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: fit-content;
+  color: white;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+.game-container .you-won .next:hover {
+  background-color: #11a9b7;
+}
+@media (max-width: 767px) {
+  .game-container .you-won-sign {
+    font-size: 20px !important;
+  }
+  .game-container .you-won .next:hover {
+    background-color: #0ec0d0;
+  }
+}
+/* End You Won  */
+/* Start You Lost */
+.game-container .you-lost {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #EEE;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.game-container .you-lost .you-lost-sign {
+  font-size: 30px;
+  background-color: rgb(175, 1, 1);
+  color: white;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid red;
+}
+.game-container .you-lost .next {
+  background-color: #0ec0d0;
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: fit-content;
+  color: white;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+.game-container .you-lost .next:hover {
+  background-color: #11a9b7;
+}
+@media (max-width: 767px) {
+  .game-container .you-lost-sign {
+    font-size: 20px;
+  }
+  .game-container .you-lost .next:hover {
+    background-color: #0ec0d0;
+  }
+}
+/* End You Lost */
 /* Start End Game View */
 .end-game {
   user-select: none;
