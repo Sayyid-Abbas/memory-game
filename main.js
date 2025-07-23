@@ -47,25 +47,31 @@ function displayTrue() {
 let start = document.querySelector(".start");
 let loader = document.createElement("div");
 loader.className = "loader";
+
+// Start game button
 start.onclick = () => {
     document.body.innerHTML = "";
+    // Displaying the loader for a second
     document.body.appendChild(loader);
     setTimeout(() => {
+        // After one second we remove the loader and trigger startGame function
         loader.remove();
         startGame();
     }, 1000);
 };
 const icons = [
-  'fa-cat', 'fa-dog', 'fa-car', 'fa-apple-alt', 'fa-star',
-  'fa-heart', 'fa-leaf', 'fa-fish', 'fa-bicycle', 'fa-moon',
-  'fa-sun', 'fa-tree',
+   'fa-cat',// 'fa-dog', 'fa-car', 'fa-apple-alt', 'fa-star',
+//   'fa-heart', 'fa-leaf', 'fa-fish', 'fa-bicycle', 'fa-moon',
+//   'fa-sun', 'fa-tree',
 ];
 let cards = [...icons, ...icons];
 let totoalScore = icons.length;
 
 // Start Game Function
 function startGame() {
+    // First we shuffle the cards to get a new order
     shuffle(cards);
+    // Then we start bulding the game board
     buildBoard(cards);
 }
 
@@ -116,9 +122,11 @@ function buildBoard(cards) {
     }
 
     gameContianer.appendChild(header);
-    gameContianer.appendChild(cardsContianer    );
+    gameContianer.appendChild(cardsContianer);
 
     document.body.appendChild(gameContianer);
+
+    // The main function that check if two pairs match
     startTesting();
 }
 
@@ -131,27 +139,38 @@ function shuffle(array) {
 }
 
 // Checking For Matching
-let click1 = false;
+let firstClick = false;
 let firstCard = "";
 let cardIndex = -1;
 function startTesting() {
+    // Getting some elements we need
     let gameContianer = document.querySelector(".game-container");
     let cards = document.querySelectorAll(".card");
     let score = document.querySelector(".score");
     let timeLeft = document.querySelector(".time-left");
+
+    // To count number of matched pairs
     let counter = 0;
+    // The total time for the game
     let time = 120;
+
+    // Each second we lower the time by one second
     let timer = setInterval(() => {
         timeLeft.textContent = `Left: ${--time}`;
         if(time == 0) {
+            // If time is out we clear the function
             clearInterval(timer);
 
+            // We display a sign to tell the user that the time is out
             let sign = document.createElement("div");
             sign.textContent = "Time Out";
             sign.className = "sign";
             gameContianer.appendChild(sign);
+
+            // After display the sign for a second we trigger endGame function
             setTimeout(() =>{
-                endGame();
+                sign.remove();
+                endGame(false);
             }, 1000);
         }
     }, 1000);
@@ -159,32 +178,44 @@ function startTesting() {
     document.addEventListener("click", (e) => {
         cards.forEach((card) => {
             if(card.contains(e.target)) {
-                if(!click1) {
+                // If it is the first click we assign the firstClick to true
+                // and assign the card index to its dataset and we save the card to compair
+                // then we flip the card
+                if(!firstClick) {
                     cardIndex = card.dataset.index;
                     firstCard = card;
-                    click1 = true;
+                    firstClick = true;
                     card.classList.add("active");
-                } else {
+                } else { // When we clicked to cards
+                    // We return nothing if we clicked the same card
                     if(card.dataset.index == cardIndex) {
                         return;
                     }
+                    // We flip the second card
                     card.classList.add("active");
+                    // Assign the pointerEvent to none to prevent the user from clicking another cards
                     document.body.style.pointerEvents = "none";
+                    // After one second we check if the cards match
                     setTimeout(() => {
                         document.body.style.pointerEvents = "auto";
+                        // If matched we keep them fliped and assign the vars to defalut values
+                        // and we increese the counter
                         if(card.innerHTML == firstCard.innerHTML) {
-                            click1 = false;
+                            firstClick = false;
                             firstCardIndex = -1;
                             firstCard = "";
                             counter++;
                             score.textContent = `${counter} of ${totoalScore}`;
+                            // If the counter equals the total score that means 
+                            // the user finished the game before the is out
+                            // so we trigger endGame function
                             if(counter == totoalScore) {
                                 setTimeout(() => {
-                                    endGame();
+                                    endGame(true);
                                 }, 1000)
                             }
-                        } else {
-                            click1 = false;
+                        } else { // if doesn't match we flip them back and assign the vars to default
+                            firstClick = false;
                             firstCard.classList.remove("active");
                             card.classList.remove("active");
                             firstCard = "";
@@ -197,7 +228,35 @@ function startTesting() {
 };
 
 // Ending The Game Function
-function endGame() {
+function endGame(stats) {
+    if(stats) {
+        displayYouWon();
+    } else {
+        displayYouLost();
+    }
+}
+function checkButtons() {
+    let close = document.querySelector(".close-game");
+    let tryAgain = document.querySelector(".try-again");
+
+    // If close we disply a good bye sign
+    document.addEventListener("click", (e) => {
+        if(close.contains(e.target)) {
+            document.body.innerHTML = "";
+            document.body.appendChild(document.createTextNode("Good Bye"));
+            document.body.style.cssText = 
+            "height: 100vh; display: flex; align-items: center; justify-content: center; font-size: 20px";
+        }
+    });
+    // If try again we click start
+    document.addEventListener("click", (e) => {
+        if(tryAgain.contains(e.target)) {
+            start.click();
+        }
+    });
+};
+
+function buildEndGameSection() {
     document.body.innerHTML = "";
 
     let endGame = document.createElement("div");
@@ -224,23 +283,70 @@ function endGame() {
     endGame.appendChild(buttons);
 
     document.body.appendChild(endGame);
-
-    checkButtons();
 }
-function checkButtons() {
-    let close = document.querySelector(".close-game");
-    let tryAgain = document.querySelector(".try-again");
+function displayYouWon() {
+    let gameContianer = document.querySelector(".game-container");
 
-    document.addEventListener("click", (e) => {
-        if(close.contains(e.target)) {
+    let container = document.createElement("div");
+    container.className = "you-won";
+
+    let sign = document.createElement("div");
+    sign.className = "you-won-sign";
+    sign.textContent = "You Won";
+
+    let nextButton = document.createElement("div");
+    nextButton.className = "next";
+    nextButton.textContent = "Next";
+
+    container.appendChild(sign);
+    container.appendChild(nextButton);
+
+    gameContianer.appendChild(container);
+
+    // When click Next
+    document.addEventListener("click", (e => {
+        if(nextButton.contains(e.target)) {
             document.body.innerHTML = "";
-            document.body.appendChild(document.createTextNode("Good Bye"));
-            document.body.style.cssText = "height: 100vh; display: flex; align-items: center; justify-content: center; font-size: 20px";
+            document.body.appendChild(loader);
+            setTimeout(() =>{
+                // We show the fnal section
+                buildEndGameSection();
+                // Then check the buttons
+                checkButtons();   
+            }, 1000);
         }
-    });
-    document.addEventListener("click", (e) => {
-        if(tryAgain.contains(e.target)) {
-            start.click();
+    }))
+}
+function displayYouLost() {
+    let gameContianer = document.querySelector(".game-container");
+
+    let container = document.createElement("div");
+    container.className = "you-lost";
+
+    let sign = document.createElement("div");
+    sign.className = "you-lost-sign";
+    sign.textContent = "You Lost";
+
+    let nextButton = document.createElement("div");
+    nextButton.className = "next";
+    nextButton.textContent = "Next";
+
+    container.appendChild(sign);
+    container.appendChild(nextButton);
+
+    gameContianer.appendChild(container);
+
+    // When click Next
+    document.addEventListener("click", (e => {
+        if(nextButton.contains(e.target)) {
+            document.body.innerHTML = "";
+            document.body.appendChild(loader);
+            setTimeout(() =>{
+                // We show the fnal section
+                buildEndGameSection();
+                // Then check the buttons
+                checkButtons();   
+            }, 1000);
         }
-    });
-};
+    }))
+}
