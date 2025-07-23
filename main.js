@@ -87,7 +87,7 @@ function buildBoard(cards) {
 
     let timeLeft = document.createElement("div");
     timeLeft.className = "time-left";
-    timeLeft.textContent = `Left: ${60}`;
+    timeLeft.textContent = `Left: ${120}`;
 
     header.appendChild(score);
     header.appendChild(title);
