@@ -60,9 +60,9 @@ start.onclick = () => {
     }, 1000);
 };
 const icons = [
-   'fa-cat',// 'fa-dog', 'fa-car', 'fa-apple-alt', 'fa-star',
-//   'fa-heart', 'fa-leaf', 'fa-fish', 'fa-bicycle', 'fa-moon',
-//   'fa-sun', 'fa-tree',
+   'fa-cat', 'fa-dog', 'fa-car', 'fa-apple-alt', 'fa-star',
+  'fa-heart', 'fa-leaf', 'fa-fish', 'fa-bicycle', 'fa-moon',
+  'fa-sun', 'fa-tree',
 ];
 let cards = [...icons, ...icons];
 let totoalScore = icons.length;
