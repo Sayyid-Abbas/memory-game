@@ -5,7 +5,7 @@ let sample = document.querySelector(".sample");
 let card1 = document.querySelector(".card-1");
 let card2 = document.querySelector(".card-2");
 
-// Set both cards not to be click
+// Set both cards not to be clicked
 let clicked1 = false;
 let clicked2 = false;
 
@@ -25,7 +25,7 @@ card2.onclick = () => {
     }
 };
 
-// display true function
+// display true sign function
 function displayTrue() {
     let sign = document.querySelector(".sign");
     setTimeout(() => {
@@ -220,7 +220,7 @@ function startTesting() {
                             card.classList.remove("active");
                             firstCard = "";
                         }
-                    }, 1000);
+                    }, 600);
                 }
             }
         });
