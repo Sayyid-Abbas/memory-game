@@ -220,9 +220,12 @@ body > .loader {
   color: rgb(232, 42, 42);
 }
 @media (max-width: 567px) {
+  .game-container {
+    margin-top: 0px;
+  }
   .game-container .cards .card {
     height: 100px;
-    width: calc((100% / 6) - 5px);
+    width: calc((100% / 4) - 5px);
   }
   .game-container .cards .card .face {
     font-size: 18px;
