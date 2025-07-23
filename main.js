@@ -99,6 +99,7 @@ function buildBoard(cards) {
     for(let i = 0; i < cards.length; i++) {
         let card = document.createElement("card");
         card.className = "card";
+        card.setAttribute("data-index", i);
 
         let back = document.createElement("div");
         back.classList.add("face", "back");
@@ -132,7 +133,7 @@ function shuffle(array) {
 // Checking For Matching
 let click1 = false;
 let firstCard = "";
-
+let cardIndex = -1;
 function startTesting() {
     let gameContianer = document.querySelector(".game-container");
     let cards = document.querySelectorAll(".card");
@@ -159,10 +160,14 @@ function startTesting() {
         cards.forEach((card) => {
             if(card.contains(e.target)) {
                 if(!click1) {
+                    cardIndex = card.dataset.index;
                     firstCard = card;
                     click1 = true;
                     card.classList.add("active");
                 } else {
+                    if(card.dataset.index == cardIndex) {
+                        return;
+                    }
                     card.classList.add("active");
                     document.body.style.pointerEvents = "none";
                     setTimeout(() => {
