@@ -65,27 +65,27 @@ const icons = [
   'fa-sun', 'fa-tree',
 ];
 let cards = [...icons, ...icons];
-let totoalScore = icons.length;
+let totalScore = icons.length;
 
 // Start Game Function
 function startGame() {
     // First we shuffle the cards to get a new order
     shuffle(cards);
-    // Then we start bulding the game board
+    // Then we start building the game board
     buildBoard(cards);
 }
 
 function buildBoard(cards) {
 
-    let gameContianer = document.createElement("div");
-    gameContianer.className = "game-container";
+    let gameContainer = document.createElement("div");
+    gameContainer.className = "game-container";
 
     let header = document.createElement("div");
     header.className = "header";
 
     let score = document.createElement("div");
     score.className = "score";
-    score.textContent = `${0} of ${totoalScore}`;
+    score.textContent = `${0} of ${totalScore}`;
 
     let title = document.createElement("div");
     title.className = "title";
@@ -99,11 +99,11 @@ function buildBoard(cards) {
     header.appendChild(title);
     header.appendChild(timeLeft);
 
-    let cardsContianer = document.createElement("div");
-    cardsContianer.className = "cards";
+    let cardsContainer = document.createElement("div");
+    cardsContainer.className = "cards";
 
     for(let i = 0; i < cards.length; i++) {
-        let card = document.createElement("card");
+        let card = document.createElement("div");
         card.className = "card";
         card.setAttribute("data-index", i);
 
@@ -118,13 +118,13 @@ function buildBoard(cards) {
         card.appendChild(back);
         card.appendChild(front);
 
-        cardsContianer.appendChild(card);
+        cardsContainer.appendChild(card);
     }
 
-    gameContianer.appendChild(header);
-    gameContianer.appendChild(cardsContianer);
+    gameContainer.appendChild(header);
+    gameContainer.appendChild(cardsContainer);
 
-    document.body.appendChild(gameContianer);
+    document.body.appendChild(gameContainer);
 
     // The main function that check if two pairs match
     startTesting();
@@ -144,7 +144,7 @@ let firstCard = "";
 let cardIndex = -1;
 function startTesting() {
     // Getting some elements we need
-    let gameContianer = document.querySelector(".game-container");
+    let gameContainer = document.querySelector(".game-container");
     let cards = document.querySelectorAll(".card");
     let score = document.querySelector(".score");
     let timeLeft = document.querySelector(".time-left");
@@ -165,7 +165,7 @@ function startTesting() {
             let sign = document.createElement("div");
             sign.textContent = "Time Out";
             sign.className = "sign";
-            gameContianer.appendChild(sign);
+            gameContainer.appendChild(sign);
 
             // After display the sign for a second we trigger endGame function
             setTimeout(() =>{
@@ -179,7 +179,7 @@ function startTesting() {
         cards.forEach((card) => {
             if(card.contains(e.target)) {
                 // If it is the first click we assign the firstClick to true
-                // and assign the card index to its dataset and we save the card to compair
+                // and assign the card index to its dataset and we save the card to compare
                 // then we flip the card
                 if(!firstClick) {
                     cardIndex = card.dataset.index;
@@ -198,23 +198,23 @@ function startTesting() {
                     // After one second we check if the cards match
                     setTimeout(() => {
                         document.body.style.pointerEvents = "auto";
-                        // If matched we keep them fliped and assign the vars to defalut values
-                        // and we increese the counter
+                        // If matched we keep them flipped and assign the vars to defalut values
+                        // and we increase the counter
                         if(card.innerHTML == firstCard.innerHTML) {
                             firstClick = false;
-                            firstCardIndex = -1;
+                            cardIndex = -1;
                             firstCard = "";
                             counter++;
-                            score.textContent = `${counter} of ${totoalScore}`;
+                            score.textContent = `${counter} of ${totalScore}`;
                             // If the counter equals the total score that means 
-                            // the user finished the game before the is out
+                            // the user finished the game before the time is out
                             // so we trigger endGame function
-                            if(counter == totoalScore) {
+                            if(counter == totalScore) {
                                 setTimeout(() => {
                                     endGame(true);
                                 }, 1000)
                             }
-                        } else { // if doesn't match we flip them back and assign the vars to default
+                        } else { // if doesn't match we assign the vars to default values, and we flip the cards back	
                             firstClick = false;
                             firstCard.classList.remove("active");
                             card.classList.remove("active");
@@ -239,7 +239,7 @@ function checkButtons() {
     let close = document.querySelector(".close-game");
     let tryAgain = document.querySelector(".try-again");
 
-    // If close we disply a good bye sign
+    // If close we display a good bye sign
     document.addEventListener("click", (e) => {
         if(close.contains(e.target)) {
             document.body.innerHTML = "";
@@ -268,15 +268,15 @@ function buildEndGameSection() {
     let buttons = document.createElement("div");
     buttons.className = "buttons";
 
-    let tryAginButton = document.createElement("try-again");
-    tryAginButton.className = "try-again";
-    tryAginButton.textContent = "Try Again";
+    let tryAgainButton = document.createElement("div");
+    tryAgainButton.className = "try-again";
+    tryAgainButton.textContent = "Try Again";
 
     let closeButton = document.createElement("div");
     closeButton.className = "close-game";
     closeButton.textContent = "Close Game";
 
-    buttons.appendChild(tryAginButton);
+    buttons.appendChild(tryAgainButton);
     buttons.appendChild(closeButton);
 
     endGame.appendChild(headTitle);
@@ -285,7 +285,7 @@ function buildEndGameSection() {
     document.body.appendChild(endGame);
 }
 function displayYouWon() {
-    let gameContianer = document.querySelector(".game-container");
+    let gameContainer = document.querySelector(".game-container");
 
     let container = document.createElement("div");
     container.className = "you-won";
@@ -301,7 +301,7 @@ function displayYouWon() {
     container.appendChild(sign);
     container.appendChild(nextButton);
 
-    gameContianer.appendChild(container);
+    gameContainer.appendChild(container);
 
     // When click Next
     document.addEventListener("click", (e => {
@@ -309,7 +309,7 @@ function displayYouWon() {
             document.body.innerHTML = "";
             document.body.appendChild(loader);
             setTimeout(() =>{
-                // We show the fnal section
+                // We show the fianlsection
                 buildEndGameSection();
                 // Then check the buttons
                 checkButtons();   
@@ -318,7 +318,7 @@ function displayYouWon() {
     }))
 }
 function displayYouLost() {
-    let gameContianer = document.querySelector(".game-container");
+    let gameContainer = document.querySelector(".game-container");
 
     let container = document.createElement("div");
     container.className = "you-lost";
@@ -334,7 +334,7 @@ function displayYouLost() {
     container.appendChild(sign);
     container.appendChild(nextButton);
 
-    gameContianer.appendChild(container);
+    gameContainer.appendChild(container);
 
     // When click Next
     document.addEventListener("click", (e => {
@@ -342,7 +342,7 @@ function displayYouLost() {
             document.body.innerHTML = "";
             document.body.appendChild(loader);
             setTimeout(() =>{
-                // We show the fnal section
+                // We show the fianl section
                 buildEndGameSection();
                 // Then check the buttons
                 checkButtons();   
