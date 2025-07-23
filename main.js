@@ -48,7 +48,7 @@ let start = document.querySelector(".start");
 let loader = document.createElement("div");
 loader.className = "loader";
 start.onclick = () => {
-    welcome.remove();
+    document.body.innerHTML = "";
     document.body.appendChild(loader);
     setTimeout(() => {
         loader.remove();
@@ -61,8 +61,7 @@ const icons = [
   'fa-sun', 'fa-tree',
 ];
 let cards = [...icons, ...icons];
-
-
+let totoalScore = icons.length;
 
 // Start Game Function
 function startGame() {
@@ -80,6 +79,7 @@ function buildBoard(cards) {
 
     let score = document.createElement("div");
     score.className = "score";
+    score.textContent = `${0} of ${totoalScore}`;
 
     let title = document.createElement("div");
     title.className = "title";
@@ -87,6 +87,7 @@ function buildBoard(cards) {
 
     let timeLeft = document.createElement("div");
     timeLeft.className = "time-left";
+    timeLeft.textContent = `Left: ${60}`;
 
     header.appendChild(score);
     header.appendChild(title);
@@ -117,6 +118,7 @@ function buildBoard(cards) {
     gameContianer.appendChild(cardsContianer    );
 
     document.body.appendChild(gameContianer);
+    startTesting();
 }
 
 // Shuffle Function
@@ -126,3 +128,114 @@ function shuffle(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
+
+// Checking For Matching
+let click1 = false;
+let firstCard = "";
+
+function startTesting() {
+    let gameContianer = document.querySelector(".game-container");
+    let cards = document.querySelectorAll(".card");
+    let score = document.querySelector(".score");
+    let timeLeft = document.querySelector(".time-left");
+    let counter = 0;
+    let time = 120;
+    let timer = setInterval(() => {
+        timeLeft.textContent = `Left: ${--time}`;
+        if(time == 0) {
+            clearInterval(timer);
+
+            let sign = document.createElement("div");
+            sign.textContent = "Time Out";
+            sign.className = "sign";
+            gameContianer.appendChild(sign);
+            setTimeout(() =>{
+                endGame();
+            }, 1000);
+        }
+    }, 1000);
+
+    document.addEventListener("click", (e) => {
+        cards.forEach((card) => {
+            if(card.contains(e.target)) {
+                if(!click1) {
+                    firstCard = card;
+                    click1 = true;
+                    card.classList.add("active");
+                } else {
+                    card.classList.add("active");
+                    document.body.style.pointerEvents = "none";
+                    setTimeout(() => {
+                        document.body.style.pointerEvents = "auto";
+                        if(card.innerHTML == firstCard.innerHTML) {
+                            click1 = false;
+                            firstCardIndex = -1;
+                            firstCard = "";
+                            counter++;
+                            score.textContent = `${counter} of ${totoalScore}`;
+                            if(counter == totoalScore) {
+                                setTimeout(() => {
+                                    endGame();
+                                }, 1000)
+                            }
+                        } else {
+                            click1 = false;
+                            firstCard.classList.remove("active");
+                            card.classList.remove("active");
+                            firstCard = "";
+                        }
+                    }, 1000);
+                }
+            }
+        });
+    });
+};
+
+// Ending The Game Function
+function endGame() {
+    document.body.innerHTML = "";
+
+    let endGame = document.createElement("div");
+    endGame.className = "end-game";
+
+    let headTitle = document.createElement("h3");
+    headTitle.textContent = "Thanks For Trying Out The Game";
+
+    let buttons = document.createElement("div");
+    buttons.className = "buttons";
+
+    let tryAginButton = document.createElement("try-again");
+    tryAginButton.className = "try-again";
+    tryAginButton.textContent = "Try Again";
+
+    let closeButton = document.createElement("div");
+    closeButton.className = "close-game";
+    closeButton.textContent = "Close Game";
+
+    buttons.appendChild(tryAginButton);
+    buttons.appendChild(closeButton);
+
+    endGame.appendChild(headTitle);
+    endGame.appendChild(buttons);
+
+    document.body.appendChild(endGame);
+
+    checkButtons();
+}
+function checkButtons() {
+    let close = document.querySelector(".close-game");
+    let tryAgain = document.querySelector(".try-again");
+
+    document.addEventListener("click", (e) => {
+        if(close.contains(e.target)) {
+            document.body.innerHTML = "";
+            document.body.appendChild(document.createTextNode("Good Bye"));
+            document.body.style.cssText = "height: 100vh; display: flex; align-items: center; justify-content: center; font-size: 20px";
+        }
+    });
+    document.addEventListener("click", (e) => {
+        if(tryAgain.contains(e.target)) {
+            start.click();
+        }
+    });
+};

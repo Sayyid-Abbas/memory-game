@@ -10,8 +10,8 @@ body {
   padding: 20px;
 }
 body > .loader {
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
   border-style: solid;
   border-color: #11c8d8 transparent #11a9b7 #11a9b7;
@@ -135,6 +135,7 @@ body > .loader {
   }
   .welcome .start {
     font-size: 15px;
+    padding: 5px 25px;
   }
   .welcome .start:hover {
     background-color: #11a9b7;
@@ -149,7 +150,19 @@ body > .loader {
   margin: 100px auto 0px;
   background-color: #EEE;
   padding: 20px;
-  border-radius: 10px;  
+  border-radius: 10px;
+  position: relative;  
+}
+.game-container .sign {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+  background-color: #EEE;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 50px;
 }
 .game-container .header {
   background-color: #11a9b7;
@@ -160,6 +173,7 @@ body > .loader {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  position: relative;
 }
 .game-container .header .title {
   font-size: 30px;
@@ -167,6 +181,10 @@ body > .loader {
   border: 1px solid white;
   padding: 10px 20px; 
   background-color: #11c8d8;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .game-container .header .time-left,
 .game-container .header .score {
@@ -199,6 +217,9 @@ body > .loader {
   transition: transform 1s;
   cursor: pointer;
 }
+.game-container .cards .card.active {
+  transform: rotateY(-180deg);
+}
 .game-container .cards .card .face {
   display: flex;
   align-items: center;
@@ -223,6 +244,9 @@ body > .loader {
   .game-container {
     margin-top: 0px;
   }
+  .game-container .header .title {
+    display: none;
+  }
   .game-container .cards .card {
     height: 100px;
     width: calc((100% / 4) - 5px);
@@ -230,8 +254,79 @@ body > .loader {
   .game-container .cards .card .face {
     font-size: 18px;
   }
+  .game-container .sign {
+    font-size: 25px;
+  }
 }
 /* End Game */
+/* Start End Game View */
+.end-game {
+  user-select: none;
+  max-width: 100%;
+  width: 800px;
+  margin: 100px auto 0px;
+  background-color: #EEE;
+  padding: 20px;
+  border-radius: 10px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.end-game > h3 {
+  width: fit-content;
+  background-color: #11a9b7;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+.end-game .buttons {
+  display: flex;
+  gap: 30px;
+}
+.end-game .buttons .close-game,
+.end-game .buttons .try-again {
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.end-game .buttons .try-again {
+  background-color: #13c3d3;
+}
+.end-game .buttons .close-game {
+  background-color: red;
+}
+.end-game .buttons .try-again:hover {
+  background-color: #11a9b7;
+}
+.end-game .buttons .close-game:hover {
+  background-color: rgb(218, 0, 0);
+}
+@media (max-width: 500px) {
+  .end-game {
+    margin-top: 200px;
+  }
+  .end-game > h3 {
+    font-size: 14px;
+  }
+  .end-game .buttons .try-again,
+  .end-game .buttons .close-game {
+    font-size: 12px;
+  }
+  .end-game .buttons .try-again:hover {
+    background-color: #13c3d3;
+  }
+  .end-game .buttons .close-game:hover {
+    background-color: red;
+  }
+  
+}
+/* End End Game View */
 @keyframes spin {
   0% {
     transform: translate(-50%, -50%) rotate(0deg);
