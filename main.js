@@ -185,14 +185,14 @@ function startTesting() {
                     cardIndex = card.dataset.index;
                     firstCard = card;
                     firstClick = true;
-                    card.classList.add("active");
+                    card.classList.add("flipped");
                 } else { // When we clicked to cards
                     // We return nothing if we clicked the same card
                     if(card.dataset.index == cardIndex) {
                         return;
                     }
                     // We flip the second card
-                    card.classList.add("active");
+                    card.classList.add("flipped");
                     // Assign the pointerEvent to none to prevent the user from clicking another cards
                     document.body.style.pointerEvents = "none";
                     // After one second we check if the cards match
@@ -216,8 +216,8 @@ function startTesting() {
                             }
                         } else { // if doesn't match we assign the vars to default values, and we flip the cards back	
                             firstClick = false;
-                            firstCard.classList.remove("active");
-                            card.classList.remove("active");
+                            firstCard.classList.remove("flipped");
+                            card.classList.remove("flipped");
                             firstCard = "";
                         }
                     }, 600);

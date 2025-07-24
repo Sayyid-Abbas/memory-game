@@ -217,7 +217,7 @@ body > .loader {
   transition: transform 0.6s;
   cursor: pointer;
 }
-.game-container .cards .card.active {
+.game-container .cards .card.flipped {
   transform: rotateY(-180deg);
 }
 .game-container .cards .card .face {
