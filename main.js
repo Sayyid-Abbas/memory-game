@@ -170,6 +170,7 @@ function startTesting() {
             // After display the sign for a second we trigger endGame function
             setTimeout(() =>{
                 sign.remove();
+                time = 120;
                 endGame(false);
             }, 1000);
         }
@@ -210,7 +211,9 @@ function startTesting() {
                             // the user finished the game before the time is out
                             // so we trigger endGame function
                             if(counter == totalScore) {
+                                clearInterval(timer);
                                 setTimeout(() => {
+                                    time = 120;
                                     endGame(true);
                                 }, 1000)
                             }
