@@ -61,7 +61,7 @@ start.onclick = () => {
 };
 const icons = [
    'fa-cat', 'fa-dog', 'fa-car', 'fa-apple-alt', 'fa-star',
-  'fa-heart', 'fa-leaf', 'fa-fish', 'fa-bicycle', 'fa-moon',
+  'fa-heart', "images/cute.png", 'fa-fish', 'fa-bicycle', 'fa-moon',
   'fa-sun', 'fa-tree',
 ];
 let cards = [...icons, ...icons];
@@ -109,7 +109,11 @@ function buildBoard(cards) {
 
         let back = document.createElement("div");
         back.classList.add("face", "back");
-        back.innerHTML = `<i class="fas ${cards[i]}"></i>`;
+        if(cards[i] == "images/cute.png") {
+            back.innerHTML = `<img src="${cards[i]}" alt="Cute Image">`;
+        } else {
+            back.innerHTML = `<i class="fas ${cards[i]}"></i>`;
+        }
 
         let front = document.createElement("div");
         front.classList.add("face", "front");
