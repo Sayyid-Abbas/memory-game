@@ -240,6 +240,9 @@ body > .loader {
 .game-container .cards .card i {
   color: rgb(232, 42, 42);
 }
+.game-container .cards .card img {
+  max-width: 100%;
+}
 @media (max-width: 567px) {
   .game-container {
     margin-top: 0px;
